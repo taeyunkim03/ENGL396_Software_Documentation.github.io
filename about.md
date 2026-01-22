@@ -16,7 +16,7 @@ Even though I'm not an active person, recently I've been trying to **exercise** 
 * Kimchi Stew
 * Pajeon (Korean Pancake)
 
-![I made this](Food.jpg)(width=50 height=30)
+![I made this](Food.jpg)
 
 ### Korean Restaurants in the Ave
 * [The BoB](https://www.google.com/search?q=the+bob&sca_esv=7cc8bad6ea9edbac&rlz=1C1UEAD_enUS977US977&udm=1&biw=1257&bih=663&aic=0&sxsrf=ANbL-n6k9czcjGjMTtLauJSaaZnSFiG6AA%3A1769052109123&ei=zZdxac6iB6eq0PEPmNzqsQc&ved=0ahUKEwiOvbbUmJ6SAxUnFTQIHRiuOnYQ4dUDCBE&uact=5&oq=the+bob&gs_lp=EhZnd3Mtd2l6LW1vZGVsZXNzLWxvY2FsIgd0aGUgYm9iMgUQABiABDIFEAAYgAQyCBAAGIAEGLEDMgUQABiABDIFEAAYgAQyBRAAGIAEMggQABiABBixAzILEAAYgAQYsQMYgwEyBRAAGIAEMgsQABiABBixAxiDAUidCFAAWM0FcAB4AJABAJgBgQGgAaIFqgEDNi4xuAEDyAEA-AEBmAIHoALABcICChAAGIAEGEMYigXCAhAQABiABBixAxhDGIMBGIoFwgIOEAAYgAQYsQMYgwEYigXCAg0QABiABBixAxhDGIoFwgILEAAYgAQYkQIYigWYAwCSBwM0LjOgB8slsgcDNC4zuAfABcIHBTAuMi41yAcWgAgA&sclient=gws-wiz-modeless-local&lqi=Cgd0aGUgYm9iSN68rZLNgoCACFoREAAQARgAGAEiB3RoZSBib2KSARFrb3JlYW5fcmVzdGF1cmFudOABAA#rlimm=16600296480724782315)
