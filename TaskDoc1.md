@@ -42,7 +42,7 @@ How to connect to Tillicum, start an interactive session, monitor your usage, in
 
 **Result**: You see the Tillicum welcome banner and a prompt showing tillicum-login in the hostname.
 
-*[PICTURE NEEDED: Screenshot of successful Tillicum login banner]*
+![Tillicum LogIn](Tillicum_LogIn.png)
 
 8. To disconnect later, type `exit` and press Enter.
 
