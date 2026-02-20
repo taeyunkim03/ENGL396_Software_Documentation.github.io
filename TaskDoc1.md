@@ -85,7 +85,7 @@ Tillicum offers three Quality of Service levels:
 
 **Result**: When ready, your prompt changes to show a compute node name (like g006) instead of login node.
 
-*[PICTURE NEEDED: Screenshot showing allocation messages and changed prompt]*
+<img src="Salloc.png" width="500" height="500">
 
 5. When finished, type `exit` to end the session and stop billing.
 
@@ -107,7 +107,7 @@ OnDemand provides a browser-based interface for accessing Tillicum without using
 
 **Result**: You see the OnDemand dashboard.
 
-*[PICTURE NEEDED: Screenshot of OnDemand dashboard homepage]*
+<img src="OnDemand.png" width="500" height="500">
 
 4. Launch an interactive application.
    Click "Interactive Apps" in the top menu.
@@ -125,7 +125,7 @@ OnDemand provides a browser-based interface for accessing Tillicum without using
 
 **Result**: Your session request is queued. You see a card showing "Queued" status.
 
-*[PICTURE NEEDED: Screenshot showing queued session card]*
+<img src="Jupyter_Queue.png" width="500" height="500">
 
 7. Wait for your session to start.
    The card updates to show "Running" when ready.
@@ -133,8 +133,6 @@ OnDemand provides a browser-based interface for accessing Tillicum without using
 8. Click "Connect to Jupyter" (or appropriate button for your application).
 
 **Result**: Your application opens in a new browser tab, running on the compute node.
-
-*[PICTURE NEEDED: Screenshot of Jupyter notebook interface through OnDemand]*
 
 9. When finished, return to the OnDemand dashboard and click "Delete" on your session card to end the session and stop billing.
 
@@ -155,12 +153,12 @@ Track your GPU usage and costs to stay within budget.
 1. Check your current usage and costs.
    Type:
    ```bash
-   hyakusage -u all
+   hyakusage -u YourUWNetID
    ```
 
 **Result**: The system displays usage by user, usage by QoS level, and budget summary showing dollars used and remaining.
 
-*[PICTURE NEEDED: Screenshot of hyakusage output showing budget breakdown]*
+<img src="Tillicum_Usage.png" width="500" height="500">
 
 2. Check currently running jobs.
    Type:
@@ -296,7 +294,7 @@ Understand where to store your files.
 **Solution**: Verify VPN is active if off-campus. Check server address spelling.
 
 **Problem**: Job stays pending  
-**Solution**: System may be busy. Debug jobs typically allocate fastest. Consider requesting fewer resources.
+**Solution**: System may be busy. Debug jobs tyally allocate fastest. Consider requesting fewer resources.
 
 **Problem**: Out of budget error  
 **Solution**: Contact your PI about budget allocation.
