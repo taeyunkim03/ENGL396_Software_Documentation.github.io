@@ -1,6 +1,6 @@
 # Reference: Getting Started on Tillicum
 
-This document is a quick-reference companion to [Getting Started with UW Research Computing](getting-started.md).
+This document is a quick-reference companion to [Getting Started with UW Research Computing](https://github.com/taeyunkim03/ENGL396_Software_Documentation.github.io/blob/main/TaskDoc1.md).
 
 ---
 
@@ -14,14 +14,14 @@ This document is a quick-reference companion to [Getting Started with UW Researc
 | **debug QoS** | Fastest-allocating QoS level: 30 minutes, 1 GPU. Use for testing before requesting longer sessions. |
 | **Duo** | UW's two-factor authentication. Required every time you log into Tillicum or OnDemand. |
 | **GPU** | A processor optimized for parallel tasks like machine learning. Tillicum nodes each have 8 NVIDIA H200 GPUs. Every job must request at least 1 GPU. |
-| **home directory** | Your personal 10 GB directory. For config files and scripts only — not datasets. |
+| **home directory** | Your personal 10 GB directory. For config files and scripts only. |
 | **HPC** | High-Performance Computing. A cluster of powerful servers for jobs too large for a personal computer. |
 | **`hyakusage`** | Command to check your Tillicum billing and remaining budget: `hyakusage -u YourUWNetID` |
 | **interactive QoS** | Allows up to 8 hours and 2 GPUs. Use for active development work. |
 | **login node** | The server you land on after SSH. Use only for submitting jobs and moving files, not computation. |
 | **Lolo** | UW's tape-based long-term archive system. Retrieval can take several hours. |
 | **`module load`** | Makes pre-installed software available: `module load conda` |
-| **NetID** | Your UW username (e.g., `jsmith`). Used to log in to all UW systems. |
+| **NetID** | Your UW username. Used to log in to all UW systems. |
 | **normal QoS** | Allows up to 24 hours and 16 GPUs. Use for production batch jobs. |
 | **OnDemand** | A browser-based interface for Tillicum — no terminal needed. Supports Jupyter, VS Code, and RStudio. |
 | **QoS** | Quality of Service. Defines job limits like wall time and GPU count. Options: `debug`, `interactive`, `normal`. |
@@ -49,7 +49,7 @@ This document is a quick-reference companion to [Getting Started with UW Researc
 **Solution:** Run `ssh-keygen -R tillicum.hyak.uw.edu`, then reconnect and type `yes` when prompted.
 
 **Problem:** Duo authentication not working.  
-**Solution:** Ensure your Duo device has network access. Generate a fresh passcode — they expire quickly.
+**Solution:** Ensure your Duo device has network access. Generate a fresh passcode.
 
 ---
 
