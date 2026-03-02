@@ -286,21 +286,3 @@ Understand where to store your files.
 
 **Save work frequently**: Interactive sessions end when time expires.
 
----
-
-## Troubleshooting
-
-**Problem**: Connection refused  
-**Solution**: Verify VPN is active if off-campus. Check server address spelling.
-
-**Problem**: Job stays pending  
-**Solution**: System may be busy. Debug jobs tyally allocate fastest. Consider requesting fewer resources.
-
-**Problem**: Out of budget error  
-**Solution**: Contact your PI about budget allocation.
-
-**Problem**: OnDemand session won't start  
-**Solution**: Check that your account has been activated. Verify you selected valid QoS and resource amounts.
-
-**Problem**: Can't find my Conda environment in Jupyter  
-**Solution**: Make sure you registered the kernel with ipykernel install command. Restart your OnDemand session.
