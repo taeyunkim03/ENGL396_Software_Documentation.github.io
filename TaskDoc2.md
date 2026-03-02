@@ -391,27 +391,6 @@ sinfo
 
 ---
 
-## Troubleshooting
-
-**Problem**: Job pending for hours  
-**Solution**: System may be busy. Check `hyakalloc` for available resources. Consider reducing resource request or submitting during off-peak times. For Tillicum, verify budget has remaining funds with `hyakusage -u all`.
-
-**Problem**: Job fails with "out of memory" error  
-**Solution**: Increase `--mem` allocation in job script. Check actual memory usage of completed jobs with `seff JOBID` to determine appropriate request.
-
-**Problem**: Transfer interrupted or stalled  
-**Solution**: Use rsync instead of scp - it automatically resumes. For very large transfers, use screen or tmux to maintain session if SSH disconnects.
-
-**Problem**: Out of storage quota  
-**Solution**: Identify large files with `du -sh * | sort -h`. Archive completed projects to Lolo. Delete temporary files and intermediate results that can be regenerated. Contact lab PI about quota increase if needed.
-
-**Problem**: Can't find archived data on Lolo  
-**Solution**: Check README files in archive directory. If data was archived by another lab member, check lab documentation or contact them for archive location and structure.
-
-**Problem**: Job array tasks failing inconsistently  
-**Solution**: Check error files for individual tasks (`array_JOBID_TASKID.err`). Ensure input files exist for all array indices. Verify tasks are independent and don't conflict (e.g., writing to same output file).
-
----
 
 ## Best Practices Summary
 
