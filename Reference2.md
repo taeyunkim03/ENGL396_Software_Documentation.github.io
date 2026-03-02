@@ -21,7 +21,7 @@ This document is a quick-reference companion to [Managing Research Data and Jobs
 
 ### Tillicum
 
-Tillicum charges **$0.90 per GPU per hour**, billed monthly via UW-IT ITBill. Every job must request at least 1 GPU — CPU-only jobs are not permitted. Billing is rounded down to the nearest GPU-hour based on actual usage.
+Tillicum charges **$0.90 per GPU per hour**, billed monthly via UW-IT ITBill. Every job must request at least 1 GPU (CPU-only jobs are not permitted). Billing is rounded down to the nearest GPU-hour based on actual usage.
 
 **Formula:** `Number of GPUs × Hours used × $0.90`
 
