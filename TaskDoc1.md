@@ -1,10 +1,10 @@
 # Getting Started with UW Research Computing
 
 ## Audience
-This guide is for UW students who are new to high-performance computing through research projects or lab positions. This document assumes basic coding knowledge but no prior HPC experience.
+This guide is for UW students who are new to high-performance computing through research projects or lab positions. It assumes basic coding knowledge but no prior HPC experience.
 
 ## What You Will Learn
-How to connect to Tillicum, start an interactive session, monitor your usage, install software packages, and use the OnDemand web interface.
+In this guide, you will learn how to connect to Tillicum, start an interactive session, monitor your usage, install software packages, and use the OnDemand web interface.
 
 ## Prerequisites
 - Active UW NetID with Duo authentication
@@ -13,11 +13,11 @@ How to connect to Tillicum, start an interactive session, monitor your usage, in
 - VPN access if working off-campus
 
 ## Estimated Time
-30-45 minutes for initial setup
+30–45 minutes for initial setup
 
 ---
 
-## Task 1: Connecting to Tillicum
+## Connecting to Tillicum
 
 ### Steps
 
@@ -27,16 +27,16 @@ How to connect to Tillicum, start an interactive session, monitor your usage, in
 2. Open your terminal application.
 
 3. Type the SSH connection command.
-   ```bash
+```bash
    ssh YourUWNetID@tillicum.hyak.uw.edu
-   ```
-   Replace `YourUWNetID` with your actual NetID.
+```
+   Replace *YourUWNetID* with your actual NetID.
 
 4. Press Enter.
 
 5. If this is your first connection, type `yes` when asked about host authenticity.
 
-6. Enter your UW password (it will not display as you type).
+6. Enter your UW password and press Enter. Your password will not display as you type.
 
 7. Complete Duo authentication when prompted.
 
@@ -44,12 +44,22 @@ How to connect to Tillicum, start an interactive session, monitor your usage, in
 
 <img src="Tillicum_LogIn.png" width="500" height="500">
 
-
-8. To disconnect later, type `exit` and press Enter.
+**Important**: When you are finished, type `exit` and press Enter to disconnect.
 
 ---
 
-## Task 2: Starting an Interactive Session
+## Starting a Session
+
+There are two ways to start a working session on Tillicum: using the **terminal** (see [Starting an Interactive Session](#starting-an-interactive-session)) or using the **OnDemand web interface** (see [Using the OnDemand Web Interface](#using-the-ondemand-web-interface)). You only need to do one.
+
+- **Use the terminal** if you are comfortable with the command line or need full control over your resource requests.
+- **Use OnDemand** if you prefer a browser-based interface, want to launch Jupyter notebooks or RStudio without terminal commands, or are just getting started and want a visual file browser.
+
+> **Note**: Both options bill GPU hours continuously once your session starts. See [Monitoring Your Usage](#monitoring-your-usage) to understand costs before proceeding.
+
+---
+
+## Starting an Interactive Session
 
 Interactive sessions let you work directly on compute nodes with GPU resources.
 
@@ -66,9 +76,9 @@ Tillicum offers three Quality of Service levels:
 
 2. Type the interactive job request.
    For testing with 1 GPU:
-   ```bash
+```bash
    salloc --qos=debug --gpus=1 --cpus-per-task=8 --mem=200G --time=00:30:00
-   ```
+```
 
    **Command explanation**:
    - `salloc`: Request interactive allocation
@@ -80,20 +90,19 @@ Tillicum offers three Quality of Service levels:
 
 3. Press Enter.
 
-4. Wait for resource allocation.
-   You will see messages about your job being queued.
+4. Wait for resource allocation. You will see messages about your job being queued.
 
-**Result**: When ready, your prompt changes to show a compute node name (like g006) instead of login node.
+**Result**: When ready, your prompt changes to show a compute node name (like `g006`) instead of the login node.
 
 <img src="Salloc.png" width="500" height="500">
 
-5. When finished, type `exit` to end the session and stop billing.
+**Important**: When you are finished, type `exit` to end the session and stop billing.
 
 ---
 
-## Task 3: Using OnDemand Web Interface
+## Using the OnDemand Web Interface
 
-OnDemand provides a browser-based interface for accessing Tillicum without using the terminal. You can launch Jupyter notebooks, RStudio, and other applications directly through your web browser.
+OnDemand provides a browser-based interface for accessing Tillicum without using the terminal. You can launch Jupyter notebooks, RStudio, and other applications directly from your browser — no terminal commands required. It also includes a visual file browser for uploading and downloading files.
 
 ### Steps
 
@@ -110,61 +119,53 @@ OnDemand provides a browser-based interface for accessing Tillicum without using
 <img src="OnDemand.png" width="500" height="500">
 
 4. Launch an interactive application.
-   Click "Interactive Apps" in the top menu.
-   Select the application you want (e.g., "Jupyter Notebook" or "VS Code").
+   Click **Interactive Apps** in the top menu.
+   Select the application you want (for example, **Jupyter Notebook** or **VS Code**).
 
-5. Configure your session.
-   Fill in the form:
-   - Number of hours: How long you need (e.g., 2)
-   - Number of GPUs: Usually 1 for learning
-   - Memory (GB): Amount needed (e.g., 64)
-   - QoS: Choose debug or interactive
-   - Conda environment: Select your environment if you created one
+5. Configure your session by filling in the form:
+   - **Number of hours**: How long you need (for example, `2`)
+   - **Number of GPUs**: Usually `1` for learning
+   - **Memory (GB)**: Amount needed (for example, `64`)
+   - **QoS**: Choose `debug` or `interactive`
+   - **Conda environment**: Select your environment if you have created one (see [Installing Software with Conda](#installing-software-with-conda))
 
-6. Click "Launch" to submit your request.
+6. Click **Launch** to submit your request.
 
-**Result**: Your session request is queued. You see a card showing "Queued" status.
+**Result**: Your session request is queued. You see a card showing **Queued** status.
 
 <img src="Jupyter_Queue.png" width="500" height="500">
 
-7. Wait for your session to start.
-   The card updates to show "Running" when ready.
+7. Wait for your session to start. The card updates to show **Running** when ready.
 
-8. Click "Connect to Jupyter" (or appropriate button for your application).
+8. Click **Connect to Jupyter** (or the appropriate button for your application).
 
 **Result**: Your application opens in a new browser tab, running on the compute node.
 
-9. When finished, return to the OnDemand dashboard and click "Delete" on your session card to end the session and stop billing.
-
-**Benefits of OnDemand**:
-- No terminal commands needed
-- Visual file browser for uploading/downloading files
-- Easy access to Jupyter notebooks and RStudio
-- Graphical interface for those less comfortable with command line
+**Important**: When you are finished, return to the OnDemand dashboard and click **Delete** on your session card to end the session and stop billing.
 
 ---
 
-## Task 4: Monitoring Your Usage
+## Monitoring Your Usage
 
 Track your GPU usage and costs to stay within budget.
 
 ### Steps
 
 1. Check your current usage and costs.
-   Type:
-   ```bash
+```bash
    hyakusage -u YourUWNetID
-   ```
+```
+   Replace *YourUWNetID* with your actual NetID.
 
-**Result**: The system displays usage by user, usage by QoS level, and budget summary showing dollars used and remaining.
+**Result**: The system displays usage by user, usage by QoS level, and a budget summary showing dollars used and remaining.
 
 <img src="Tillicum_Usage.png" width="500" height="500">
 
 2. Check currently running jobs.
-   Type:
-   ```bash
+```bash
    squeue -u YourUWNetID
-   ```
+```
+   Replace *YourUWNetID* with your actual NetID.
 
 **Result**: Shows your active jobs with job ID, status, runtime, and allocated resources.
 
@@ -173,102 +174,105 @@ Track your GPU usage and costs to stay within budget.
    Example: 1 GPU for 2 hours = 1 × 2 × $0.90 = $1.80
 
 4. To cancel a job if needed:
-   ```bash
+```bash
    scancel JOBID
-   ```
-   Replace `JOBID` with the actual job ID from squeue.
+```
+   Replace *JOBID* with the actual job ID from `squeue`.
 
 ---
 
-## Task 5: Installing Software with Conda
+## Installing Software with Conda
 
-Create isolated environments for your Python packages.
+Follow these steps only if you need to install custom Python packages or use a specific Python version. If you are using software already available on Tillicum, you can skip this section.
 
 ### Steps
 
-1. Ensure you have an active interactive session on a compute node.
+1. Ensure you have an active interactive session on a compute node (see [Starting an Interactive Session](#starting-an-interactive-session) or [Using the OnDemand Web Interface](#using-the-ondemand-web-interface)).
 
 2. Load the Conda module.
-   ```bash
+```bash
    module load conda
-   ```
+```
 
 3. Create a new environment.
-   ```bash
+```bash
    conda create -n myproject python=3.12 -y
-   ```
-   Replace `myproject` with your chosen name.
+```
+   Replace *myproject* with your chosen environment name.
 
-**Result**: Conda installs Python and base packages (takes several minutes).
+**Result**: Conda installs Python and base packages. This may take several minutes.
 
 4. Activate your environment.
-   ```bash
+```bash
    conda activate myproject
-   ```
+```
 
 **Result**: Your prompt shows the environment name in parentheses.
 
-5. Install packages you need.
-   ```bash
+5. Install the packages that you need.
+```bash
    pip install numpy pandas matplotlib
-   ```
+```
 
-6. To use in Jupyter notebooks, register the kernel.
-   ```bash
+6. To use your environment in Jupyter notebooks, register the kernel.
+```bash
    pip install ipykernel
    python -m ipykernel install --user --name=myproject --display-name "My Project"
-   ```
+```
+   Replace *myproject* with your environment name and replace *"My Project"* with the display name you want to see in Jupyter.
 
-**Result**: Your environment appears in Jupyter kernel selection menu when using OnDemand.
+**Result**: Your environment appears in the Jupyter kernel selection menu when using OnDemand.
 
 7. To deactivate when done:
-   ```bash
+```bash
    conda deactivate
-   ```
+```
 
 ---
 
-## Task 6: Navigating Directories
+## Navigating Directories
 
-Understand where to store your files.
+Read this section if you are unsure where to store your files or need to understand how Tillicum storage is organized. You do not need to run every command here in order — use the ones relevant to your situation.
 
 ### Tillicum Storage Locations
 
-- **Home**: `/gpfs/home/YourUWNetID` (10 GB, for configuration files)
-- **Lab projects**: `/gpfs/projects/YourLabName` (1 TB, for active work)
-- **Scratch**: `/gpfs/scrubbed/YourUWNetID` (100 TB, temporary, purged after 60 days)
+| Location | Path | Quota | Use For |
+|---|---|---|---|
+| Home | `/gpfs/home/`*YourUWNetID* | 10 GB | Configuration files |
+| Lab projects | `/gpfs/projects/`*YourLabName* | 1 TB | Active work |
+| Scratch | `/gpfs/scrubbed/`*YourUWNetID* | 100 TB | Temporary files (purged after 60 days) |
 
 ### Steps
 
 1. Check your current location.
-   ```bash
+```bash
    pwd
-   ```
+```
 
 2. Go to your home directory.
-   ```bash
+```bash
    cd ~
-   ```
+```
 
 3. Go to your lab directory.
-   ```bash
+```bash
    cd /gpfs/projects/YourLabName
-   ```
-   Replace `YourLabName` with your actual lab name.
+```
+   Replace *YourLabName* with your actual lab name.
 
 4. List directory contents.
-   ```bash
+```bash
    ls -lh
-   ```
+```
 
 **Result**: Shows files with sizes, permissions, and dates.
 
 5. Check disk usage.
-   ```bash
+```bash
    du -sh *
-   ```
+```
 
-**Result**: Shows size of each file and folder.
+**Result**: Shows the size of each file and folder.
 
 ---
 
@@ -278,11 +282,10 @@ Understand where to store your files.
 
 **Start with debug QoS**: Test your code with short sessions before requesting longer time.
 
-**Monitor usage regularly**: Check hyakusage weekly to avoid budget surprises.
+**Monitor usage regularly**: Check `hyakusage` weekly to avoid budget surprises.
 
-**Use OnDemand for learning**: The web interface is easier when you're getting started. Switch to command line as you become more comfortable.
+**Use OnDemand for learning**: The web interface is easier when you are getting started. Switch to the command line as you become more comfortable.
 
 **Use scratch space wisely**: Files in scrubbed are deleted after 60 days of inactivity.
 
 **Save work frequently**: Interactive sessions end when time expires.
-
