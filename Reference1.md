@@ -30,7 +30,7 @@ This document is a quick-reference companion to [Getting Started with UW Researc
 | **`scancel`** | SLURM command to cancel a job and stop billing: `scancel JOBID` |
 | **scratch** | Temporary high-capacity storage. Tillicum scratch is purged after 60 days of inactivity. |
 | **SLURM** | The job scheduler used by Hyak and Tillicum. All `s`-prefixed job commands are SLURM commands. |
-| **`squeue`** | Shows your active and pending jobs: `squeue -u YourUWNetID` |
+| **`squeue`** | SLURM command to show your active and pending jobs: `squeue -u YourUWNetID` |
 | **SSH** | The protocol for connecting to remote servers: `ssh YourUWNetID@tillicum.hyak.uw.edu` |
 | **Tillicum** | UW's GPU-accelerated HPC cluster for AI, ML, and data science. Billed at $0.90/GPU-hour. |
 | **VPN** | Required for off-campus access. Connect to `uwvpn.washington.edu` using the F5 Big-IP Edge client. |
