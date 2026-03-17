@@ -8,7 +8,7 @@ Welcome to the UW Research Computing documentation. This doc set covers UW's thr
 
 New to high-performance computing through a research project or lab position? Start here.
 
-- [Introduction](Overview1.md) — What UW's HPC systems are and how they work together
+- [Introduction](overview1.md) — What UW's HPC systems are and how they work together
 - [Getting Started](TaskDoc1.md) — How to connect, start a session, install software, and monitor usage
 - [Quick Reference](Reference1.md) — Glossary and troubleshooting
 
@@ -18,7 +18,7 @@ New to high-performance computing through a research project or lab position? St
 
 Managing a lab's computational projects and data archiving needs? Start here.
 
-- [Introduction](Overview2.md) — Infrastructure overview and resource selection guidance
+- [Introduction](overview2.md) — Infrastructure overview and resource selection guidance
 - [Managing Jobs & Data](TaskDoc2.md) — Batch jobs, data transfer, archiving, and storage organization
 - [Quick Reference](Reference2.md) — Storage tiers, compute costs, and troubleshooting
 
