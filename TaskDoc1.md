@@ -42,7 +42,7 @@ In this guide, you will learn how to connect to Tillicum, start an interactive s
 
 **Result**: You see the Tillicum welcome banner and a prompt showing tillicum-login in the hostname.
 
-<img src="Tillicum_LogIn.png" width="500" height="500">
+<img src="Tillicum_LogIn.png" width="500" height="300">
 
 **Important**: When you are finished, type `exit` and press Enter to disconnect.
 
@@ -94,7 +94,7 @@ Tillicum offers three Quality of Service levels:
 
 **Result**: When ready, your prompt changes to show a compute node name (like `g006`) instead of the login node.
 
-<img src="Salloc.png" width="500" height="500">
+<img src="Salloc.png" width="500" height="300">
 
 **Important**: When you are finished, type `exit` to end the session and stop billing.
 
@@ -116,7 +116,7 @@ OnDemand provides a browser-based interface for accessing Tillicum without using
 
 **Result**: You see the OnDemand dashboard.
 
-<img src="OnDemand.png" width="500" height="500">
+<img src="OnDemand.png" width="500" height="300">
 
 4. Launch an interactive application.
    Click **Interactive Apps** in the top menu.
@@ -133,7 +133,7 @@ OnDemand provides a browser-based interface for accessing Tillicum without using
 
 **Result**: Your session request is queued. You see a card showing **Queued** status.
 
-<img src="Jupyter_Queue.png" width="500" height="500">
+<img src="Jupyter_Queue.png" width="500" height="300">
 
 7. Wait for your session to start. The card updates to show **Running** when ready.
 
@@ -159,7 +159,7 @@ Track your GPU usage and costs to stay within budget.
 
 **Result**: The system displays usage by user, usage by QoS level, and a budget summary showing dollars used and remaining.
 
-<img src="Tillicum_Usage.png" width="500" height="500">
+<img src="Tillicum_Usage.png" width="500" height="300">
 
 2. Check currently running jobs.
 ```bash
