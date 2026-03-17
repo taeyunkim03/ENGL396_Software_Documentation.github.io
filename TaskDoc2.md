@@ -4,7 +4,7 @@
 This guide is for academic researchers and principal investigators managing computational projects on Hyak and Tillicum with data archiving needs on Lolo.
 
 ## What You Will Learn
-How to organize data across storage tiers, submit batch jobs, transfer data efficiently, and archive to Lolo.
+In this guide, you will learn how to organize data across storage tiers, submit batch jobs, transfer data efficiently, and archive completed projects to Lolo.
 
 ## Prerequisites
 - Active accounts on Hyak, Tillicum, and/or Lolo
@@ -12,205 +12,221 @@ How to organize data across storage tiers, submit batch jobs, transfer data effi
 - Understanding of your project's computational requirements
 
 ## Estimated Time
-20-30 minutes to learn core workflows
+20–30 minutes to learn core workflows
 
 ---
 
 ## Understanding Storage Architecture
 
 **Hyak**:
-- Home: `/mmfs1/home/YourUWNetID` (10 GB)
-- Lab scratch: `/mmfs1/gscratch/YourLabName` (variable quota)
+- Home: `/mmfs1/home/`*YourUWNetID* (10 GB)
+- Lab scratch: `/mmfs1/gscratch/`*YourLabName* (variable quota)
 
 **Tillicum**:
-- Home: `/gpfs/home/YourUWNetID` (10 GB)
-- Lab projects: `/gpfs/projects/YourLabName` (1 TB)
+- Home: `/gpfs/home/`*YourUWNetID* (10 GB)
+- Lab projects: `/gpfs/projects/`*YourLabName* (1 TB)
 - Scratch: `/gpfs/scrubbed` (100 TB, purged after 60 days)
 
 **Lolo**:
-- Lab archive: `/archive/YourLabName` (backed up, slow retrieval)
+- Lab archive: `/archive/`*YourLabName* (backed up, slow retrieval)
 
 ---
 
-## Task 1: Checking Storage Usage
+## Checking Storage Usage
 
-Monitor storage to avoid quota issues.
+Monitor storage regularly to avoid hitting quota limits.
 
 ### Steps
 
 1. On Hyak, check lab allocation.
-   ```bash
+```bash
    ssh YourUWNetID@klone.hyak.uw.edu
    hyakalloc
-   ```
+```
+   Replace *YourUWNetID* with your actual NetID.
 
 **Result**: Shows storage quotas and current usage.
 
 2. Check directory sizes.
-   ```bash
+```bash
    cd /mmfs1/gscratch/YourLabName
    du -h --max-depth=1
-   ```
+```
+   Replace *YourLabName* with your actual lab name.
 
 **Result**: Shows usage breakdown by subdirectory.
 
 3. On Lolo, view usage report.
-   ```bash
+```bash
    ssh YourUWNetID@lolo.uw.edu
    cd /archive/YourLabName
    cat usage_report.txt
-   ```
+```
+   Replace *YourUWNetID* and *YourLabName* with your actual NetID and lab name.
 
 ---
 
-## Task 2: Submitting Batch Jobs
+## Submitting Batch Jobs
 
-Run long computations without manual supervision.
+Use batch jobs to run long computations without manual supervision. This is the standard workflow for most production analyses.
 
 ### Steps
 
 1. Create a job script.
-   ```bash
+```bash
    nano my_job.sh
-   ```
+```
+   Replace *my_job.sh* with your preferred script name.
 
-2. Write the script content:
-   
-   ```bash
+   > **Note**: This guide uses `nano` as the text editor. If your system uses a different editor (such as `vim` or `emacs`), substitute that command instead.
+
+2. Write the script content. Copy the template below as a starting point. Lines marked with a comment are ones you will likely need to customize:
+```bash
    #!/bin/bash
-   #SBATCH --job-name=analysis
-   #SBATCH --account=YourLabName
+   #SBATCH --job-name=analysis          # Replace with a descriptive name for your job
+   #SBATCH --account=YourLabName        # Replace with your lab or account name
    #SBATCH --partition=compute
    #SBATCH --nodes=1
-   #SBATCH --cpus-per-task=16
-   #SBATCH --mem=128G
-   #SBATCH --time=12:00:00
+   #SBATCH --cpus-per-task=16           # Adjust based on your workload
+   #SBATCH --mem=128G                   # Adjust based on your memory needs
+   #SBATCH --time=12:00:00              # Adjust: format is HH:MM:SS
    #SBATCH --output=job_%j.out
    #SBATCH --error=job_%j.err
-   
-   module load python/3.12
-   conda activate myproject
-   python analysis_script.py
-   echo "Job completed"
-   ```
 
-3. Save and exit (Ctrl+O, Enter, Ctrl+X).
+   module load python/3.12
+   conda activate myproject             # Replace with your conda environment name
+   python analysis_script.py           # Replace with your script name
+   echo "Job completed"
+```
+
+3. Save and exit (Ctrl+O, Enter, Ctrl+X in nano).
 
 4. Submit the job.
-   ```bash
+```bash
    sbatch my_job.sh
-   ```
+```
+   Replace *my_job.sh* with your script name.
 
-**Result**: Returns job ID number.
+**Result**: Returns a job ID number.
 
 5. Monitor job status.
-   ```bash
+```bash
    squeue -u YourUWNetID
-   ```
+```
+   Replace *YourUWNetID* with your actual NetID.
 
 **Result**: Shows job state (PD=pending, R=running, CG=completing).
 
 6. Check output after completion.
-   ```bash
+```bash
    less job_JOBID.out
-   ```
+```
+   Replace *JOBID* with the job ID number returned in step 4.
 
 7. To cancel a running job:
-   ```bash
+```bash
    scancel JOBID
-   ```
+```
+   Replace *JOBID* with the actual job ID.
 
 ---
 
-## Task 3: Creating Job Arrays
+## Creating Job Arrays
 
-Run multiple similar tasks efficiently.
+Follow these steps only if you need to run multiple similar tasks in parallel, such as processing a set of input files or running a parameter sweep. If you are running a single analysis, use [Submitting Batch Jobs](#submitting-batch-jobs) instead.
 
 ### Steps
 
-1. Create array job script.
-   ```bash
+1. Create an array job script.
+```bash
    nano array_job.sh
-   ```
+```
+   Replace *array_job.sh* with your preferred script name.
 
-2. Add array directive:
-   
-   ```bash
+2. Add the array directive. Copy the template below and customize the marked lines:
+```bash
    #!/bin/bash
-   #SBATCH --job-name=array_analysis
-   #SBATCH --account=YourLabName
+   #SBATCH --job-name=array_analysis    # Replace with a descriptive name
+   #SBATCH --account=YourLabName        # Replace with your lab or account name
    #SBATCH --partition=compute
-   #SBATCH --cpus-per-task=8
-   #SBATCH --mem=64G
-   #SBATCH --time=04:00:00
-   #SBATCH --array=1-10
+   #SBATCH --cpus-per-task=8            # Adjust based on your workload
+   #SBATCH --mem=64G                    # Adjust based on your memory needs
+   #SBATCH --time=04:00:00              # Adjust: format is HH:MM:SS
+   #SBATCH --array=1-10                 # Replace with your desired task range
    #SBATCH --output=array_%A_%a.out
    #SBATCH --error=array_%A_%a.err
-   
+
    echo "Processing task ${SLURM_ARRAY_TASK_ID}"
-   python script.py --input data_${SLURM_ARRAY_TASK_ID}.csv
-   ```
+   python script.py --input data_${SLURM_ARRAY_TASK_ID}.csv   # Replace with your script and input pattern
+```
 
 3. Submit:
-   ```bash
+```bash
    sbatch array_job.sh
-   ```
+```
+   Replace *array_job.sh* with your script name.
 
-**Result**: Creates 10 jobs numbered 1-10, each processing a different input file.
+**Result**: Creates 10 jobs numbered 1–10, each processing a different input file.
 
-**Array Notes**:
-- `%A` is the master job array ID
-- `%a` is the individual task ID
-- `SLURM_ARRAY_TASK_ID` variable contains the current task number
+**Array variable reference**:
+- `%A`: Master job array ID
+- `%a`: Individual task ID
+- `SLURM_ARRAY_TASK_ID`: Contains the current task number at runtime
 - Useful for parameter sweeps or processing multiple datasets
 
 ---
 
-## Task 4: Transferring Data Between Systems
+## Transferring Data Between Systems
 
-### For Small Files (< 1 GB)
+Choose the appropriate command based on where your data is coming from and how large it is.
 
+### Transferring from Your Local Machine to a Cluster
+
+Use these commands when copying data from your own computer to Hyak or Tillicum.
+
+**For small files (< 1 GB)**:
 ```bash
 scp local_file.txt YourUWNetID@klone.hyak.uw.edu:/mmfs1/gscratch/YourLabName/
 ```
+Replace *YourUWNetID*, *local_file.txt*, and *YourLabName* with your actual values.
 
-### For Large Files (> 1 GB)
-
-Use rsync for reliability:
+**For large files (> 1 GB)**, use `rsync` for reliability:
 ```bash
 rsync -avz --progress local_data/ YourUWNetID@klone.hyak.uw.edu:/mmfs1/gscratch/YourLabName/data/
 ```
+Replace *YourUWNetID*, *local_data/*, and *YourLabName* with your actual values.
 
-**Options**:
+`rsync` options:
 - `-a`: Preserve permissions and timestamps
 - `-v`: Show progress
 - `-z`: Compress during transfer
-- `--progress`: Display progress bar
+- `--progress`: Display a progress bar
 
-If transfer is interrupted, rerun the same rsync command to resume automatically.
+If the transfer is interrupted, rerun the same `rsync` command to resume automatically.
 
-### Between Hyak and Tillicum
+**For very large datasets (multi-TB)**: Contact UW Research Computing about using Globus for optimal transfer speeds and reliability.
 
+### Transferring Between Hyak and Tillicum
+
+Use this command when moving data between UW clusters rather than from your local machine. Run this command from a Hyak login node:
 ```bash
 rsync -avz /mmfs1/gscratch/YourLabName/data/ YourUWNetID@tillicum.hyak.uw.edu:/gpfs/projects/YourLabName/data/
 ```
-
-### For Very Large Datasets (Multi-TB)
-
-Contact UW Research Computing about using Globus for optimal transfer speeds and reliability.
+Replace *YourLabName* and *YourUWNetID* with your actual values.
 
 ---
 
-## Task 5: Archiving Data to Lolo
+## Archiving Data to Lolo
 
-Move completed projects to long-term storage.
+Follow these steps when a project is complete and you are ready to move it to long-term storage. Do not use Lolo for data you are actively working with, as retrieval can take several hours.
 
 ### Steps
 
 1. Compress data on Hyak or Tillicum.
-   ```bash
+```bash
    tar -czf project_final.tar.gz /path/to/project/data/
-   ```
+```
+   Replace *project_final.tar.gz* with your preferred archive name and replace */path/to/project/data/* with the actual path to your data.
 
    **Command breakdown**:
    - `tar`: Archive utility
@@ -218,30 +234,34 @@ Move completed projects to long-term storage.
    - `-z`: Compress with gzip
    - `-f`: Specify filename
 
-2. Verify archive created successfully.
-   ```bash
+2. Verify the archive was created successfully.
+```bash
    ls -lh project_final.tar.gz
-   ```
+```
+   Replace *project_final.tar.gz* with your archive name.
 
 3. Transfer to Lolo.
-   ```bash
+```bash
    scp project_final.tar.gz YourUWNetID@lolo.uw.edu:/archive/YourLabName/
-   ```
+```
+   Replace *project_final.tar.gz*, *YourUWNetID*, and *YourLabName* with your actual values.
 
-**Note**: Large transfers may take hours. Consider using screen or tmux to prevent interruption if SSH connection drops.
+   > **Note**: Large transfers may take hours. Consider running this inside `screen` or `tmux` to prevent interruption if your SSH connection drops.
 
 4. Verify arrival on Lolo.
-   ```bash
+```bash
    ssh YourUWNetID@lolo.uw.edu
    ls -lh /archive/YourLabName/
-   ```
+```
+   Replace *YourUWNetID* and *YourLabName* with your actual values.
 
 5. Create documentation.
-   ```bash
+```bash
    cd /archive/YourLabName
    nano README_project_final.txt
-   ```
-   
+```
+   Replace *YourLabName* with your actual lab name and replace *README_project_final.txt* with a descriptive filename for your project.
+
    Include:
    - Project name and date
    - Data description and file structure
@@ -250,58 +270,56 @@ Move completed projects to long-term storage.
    - Related publications or reports
    - Contact information
 
-6. Verify archive integrity before deleting source.
-   On Lolo, test the archive:
-   ```bash
+6. Verify archive integrity before deleting source files. On Lolo, test the archive:
+```bash
    tar -tzf project_final.tar.gz | head
-   ```
-   
-   This lists contents without extracting. Verify key files are present.
+```
+   Replace *project_final.tar.gz* with your archive name. This lists contents without extracting. Confirm that key files are present.
+
+> **Warning**: Deletion from hot storage is permanent. Always verify the Lolo archive in step 6 before proceeding to step 7.
 
 7. Delete from hot storage after verification.
-   ```bash
+```bash
    ssh YourUWNetID@klone.hyak.uw.edu
    rm -rf /mmfs1/gscratch/YourLabName/project_directory/
-   ```
-
-**Warning**: Deletion is permanent from hot storage. Always verify Lolo archive first.
+```
+   Replace *YourUWNetID*, *YourLabName*, and *project_directory* with your actual values.
 
 ---
 
-## Task 6: Retrieving Data from Lolo
+## Retrieving Data from Lolo
 
-Restore archived data when needed.
+Follow these steps only if you need to restore a previously archived project. Plan ahead — retrieval from tape-based storage may take several hours.
 
 ### Steps
 
 1. Copy from Lolo to Hyak.
-   ```bash
+```bash
    scp YourUWNetID@lolo.uw.edu:/archive/YourLabName/project_final.tar.gz /mmfs1/gscratch/YourLabName/
-   ```
-
-**Note**: Retrieval from tape-based storage may take several hours. Plan ahead.
+```
+   Replace *YourUWNetID*, *YourLabName*, and *project_final.tar.gz* with your actual values.
 
 2. Extract on Hyak.
-   ```bash
+```bash
    cd /mmfs1/gscratch/YourLabName
    tar -xzf project_final.tar.gz
-   ```
+```
+   Replace *YourLabName* and *project_final.tar.gz* with your actual values.
 
 3. Verify extraction.
-   ```bash
+```bash
    ls -lR | head -50
-   ```
+```
 
-**Result**: Shows directory structure and files were extracted correctly.
+**Result**: Shows directory structure confirming that files were extracted correctly.
 
 ---
 
-## Task 7: Organizing Lab Data Structure
+## Organizing Lab Data Structure
 
-Implement consistent organization for better management.
+Follow these steps when setting up a new project or standardizing your lab's storage conventions. This is a one-time setup, not a recurring workflow.
 
 ### Recommended Structure
-
 ```
 /gpfs/projects/YourLabName/
 ├── raw_data/           (original, unprocessed data)
@@ -314,25 +332,24 @@ Implement consistent organization for better management.
 
 ### Steps
 
-1. Create directory structure.
-   ```bash
+1. Create the directory structure.
+```bash
    cd /gpfs/projects/YourLabName
    mkdir -p raw_data processed_data scripts results envs archive_staging
-   ```
+```
+   Replace *YourLabName* with your actual lab name.
 
 2. Set appropriate permissions for lab sharing.
-   ```bash
+```bash
    chmod -R 775 raw_data processed_data scripts results
-   ```
-   
-   This allows lab members to read and write shared data.
+```
+   This allows all lab members to read and write to shared directories.
 
-3. Document structure for lab members.
-   ```bash
+3. Document the structure for lab members.
+```bash
    nano README.txt
-   ```
-   
-   Explain what belongs in each directory and naming conventions.
+```
+   Explain what belongs in each directory and the naming conventions your lab uses.
 
 ---
 
@@ -342,14 +359,14 @@ Implement consistent organization for better management.
 
 **Project completion**: Archive final datasets, results, and code to Lolo within 30 days of completion.
 
-**Monthly reviews**: Schedule regular storage audits. Identify and archive projects meeting criteria:
+**Monthly reviews**: Schedule regular storage audits. Identify and archive projects that meet these criteria:
 - Analysis completed
 - Results published or submitted
 - No active work planned for 3+ months
 - Raw data no longer being actively processed
 
 **Archival checklist**:
-- Data compressed into .tar.gz archives
+- Data compressed into `.tar.gz` archives
 - README file created with comprehensive metadata
 - Transfer to Lolo completed and verified
 - Archive integrity tested
@@ -367,15 +384,15 @@ Implement consistent organization for better management.
 ```bash
 seff JOBID
 ```
+Replace *JOBID* with your actual job ID. This shows CPU efficiency, memory usage, and runtime statistics.
 
-This shows CPU efficiency, memory usage, and runtime statistics.
-
-**Request 10-20% overhead**: After profiling, request slightly more than typical usage to handle variability without excessive over-allocation.
+**Request 10–20% overhead**: After profiling, request slightly more than typical usage to handle variability without excessive over-allocation.
 
 **Use job dependencies**: Chain related jobs to automate workflows:
 ```bash
 sbatch --dependency=afterok:JOBID second_job.sh
 ```
+Replace *JOBID* with the ID of the preceding job and replace *second_job.sh* with your script name.
 
 **Dependency types**:
 - `afterok`: Start after successful completion
@@ -391,7 +408,6 @@ sinfo
 
 ---
 
-
 ## Best Practices Summary
 
 **Document everything**: Maintain clear documentation of data processing, analysis workflows, and archive locations.
@@ -400,10 +416,10 @@ sinfo
 
 **Monitor costs**: For Tillicum, regularly check budget usage with `hyakusage -u all`. Each GPU-hour costs $0.90.
 
-**Test before production**: Run short test jobs with subset of data before submitting large batch jobs.
+**Test before production**: Run short test jobs with a subset of data before submitting large batch jobs.
 
 **Compress aggressively**: Use gzip compression for archival to reduce storage costs and transfer times.
 
-**Coordinate with lab**: Share successful job scripts, established workflows, and data organization practices with lab members.
+**Coordinate with your lab**: Share successful job scripts, established workflows, and data organization practices with lab members.
 
-**Plan for reproducibility**: Archive not just data but also code, environments (export conda environments), and documentation to enable future reproduction of results.
+**Plan for reproducibility**: Archive not just data but also code, environments (export Conda environments), and documentation to enable future reproduction of results.
