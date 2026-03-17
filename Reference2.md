@@ -21,7 +21,7 @@ This document is a quick-reference companion to [Managing Research Data and Jobs
 
 ### Tillicum
 
-Tillicum charges **$0.90 per GPU per hour**, billed monthly via UW-IT ITBill. Every job must request at least 1 GPU (CPU-only jobs are not permitted). Billing is rounded down to the nearest GPU-hour based on actual usage.
+Tillicum charges **$0.90 per GPU per hour**, billed monthly via UW-IT ITBill. Every job must request at least 1 GPU (CPU-only jobs are not permitted). Billing is based on actual usage time.
 
 **Formula:** `Number of GPUs × Hours used × $0.90`
 
@@ -34,7 +34,6 @@ Tillicum charges **$0.90 per GPU per hour**, billed monthly via UW-IT ITBill. Ev
 | 8 | 24 hours (normal) | $172.80 |
 
 Slurm shows an estimated cost when you submit a job:
-
 ```
 salloc: Req GPUs: 1
 salloc: Req Time: 2.00 hrs
@@ -85,7 +84,6 @@ Hardware prices change frequently. For current quotes, email help@uw.edu.
 
 **Problem:** Job array tasks failing inconsistently.  
 **Solution:** Check individual task error files (`array_JOBID_TASKID.err`). Verify input files exist for all array indices. Ensure tasks write to separate output files using `$SLURM_ARRAY_TASK_ID` in filenames.
-
 
 ---
 
